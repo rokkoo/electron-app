@@ -1,12 +1,14 @@
 {
-   "name": "electron-list",
+   "name": "APP-NAME",
    "author": "Test",
    "version": "0.1.0",
    "private": true,
-   "main": "public/main.js",
-   "homepage": ".",
+   "main": "public/electron.js",
+   "description": "Electron app",
+   "homepage": "./",
    "build": {
       "appId": "com.example.electron-cra",
+      "electronVersion": "6.0.12",
       "files": [
          "build/**/*",
          "node_modules/**/*"
@@ -19,24 +21,26 @@
       "concurrently": "^5.0.0",
       "cross-env": "^6.0.3",
       "electron-is-dev": "^1.1.0",
+      "i": "^0.3.6",
       "is-electron": "^2.2.0",
       "react": "^16.10.2",
       "react-dom": "^16.10.2",
       "react-router-dom": "^5.1.2",
       "react-scripts": "3.2.0",
-      "styled-components": "^4.4.0"
+      "styled-components": "^4.4.0",
+      "wait-on": "^3.3.0"
    },
    "scripts": {
-      "start": "react-scripts start",
+      "react-start": "react-scripts start",
       "build": "react-scripts build",
-      "waitStart": "concurrently \"cross-env BROWSER=none npm run react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
-      "electron-start": "electron .",
-      "preelectron-pack": "npm run build",
-      "electron-pack": "build --win --macos -c.extraMetadata.main=build/Main.js",
-      "pack": "electron-builder --dir",
-      "dist": "npx build --x64 --macos --win --linux --c.extraMetadata.main=build/electron.js -p always",
       "test": "react-scripts test",
-      "eject": "react-scripts eject"
+      "eject": "react-scripts eject",
+      "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+      "clean": "rm -rf build dist",
+      "clean-win": "rmdir build /S /Q & rmdir dist/S /Q",
+      "build-electron-mac": "mkdir build/src && cp -r src/shared/. build/src/shared",
+      "build-electron-win": "mkdir build/src & robocopy src/shared build/src/shared",
+      "package": "electron-builder build --win -c.extraMetadata.main=build/electron.js --publish never"
    },
    "eslintConfig": {
       "extends": "react-app"

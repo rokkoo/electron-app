@@ -32,24 +32,25 @@ function createWindow() {
       }
    });
 
-   mainWindow.loadURL(
-      isDev
-         ? 'http://localhost:3000'
-         : `file://${path.join(__dirname, '../build/index.html')}`
-   );
+   const startUrl = isDev
+      ? 'http://localhost:3000'
+      : url.format({
+           pathname: path.join(__dirname, './index.html'),
+           protocol: 'file:',
+           slashes: true
+        });
 
-   infoWindow.loadURL(
-      isDev
-         ? 'http://localhost:3000/info'
-         : `file://${path.join(__dirname, '../build/index.html')}`
-   );
+   mainWindow.loadURL(startUrl);
+
+   infoWindow.loadURL(startUrl);
 
    // Open the DevTools.
    mainWindow.webContents.openDevTools();
    infoWindow.webContents.openDevTools();
 
    mainWindow.on('closed', () => (mainWindow = null));
-   infoWindow.on('closed', e => {
+
+   infoWindow.on('close', e => {
       e.preventDefault();
       infoWindow.hide();
    });
@@ -70,6 +71,7 @@ app.on('activate', () => {
 });
 
 ipcMain.on('info', (even, args) => {
+   console.log(process.env.ELECTRON_START_URL, 'env');
    console.log('On toggle-infor');
    infoWindow.show();
    infoWindow.webContents.send('info', args);

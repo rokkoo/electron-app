@@ -5,7 +5,7 @@ import './App.css';
 import Routes from './routes';
 
 function App() {
-   return <Routes></Routes>;
+   return <p>app</p>;
 }
 
 export default App;
