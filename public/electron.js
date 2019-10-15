@@ -7,10 +7,13 @@ const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
 
-let mainWindow;
-let infoWindow;
+const { up, addUser } = require('./sqlite');
 
-function createWindow() {
+let mainWindow;
+
+async function createWindow() {
+   await up();
+
    mainWindow = new BrowserWindow({
       width: 800,
       height: 600,
@@ -51,7 +54,8 @@ app.on('activate', () => {
    }
 });
 
-ipcMain.on('info', (even, args) => {
+ipcMain.on('info', async (even, args) => {
    console.log('On info');
+   const data = addUser('dryad');
    mainWindow.webContents.send('loadData', args);
 });

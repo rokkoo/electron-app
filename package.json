@@ -5,7 +5,7 @@
    "private": true,
    "main": "public/electron.js",
    "description": "Electron app",
-   "homepage": "./",
+   "homepage": ".",
    "build": {
       "appId": "com.example.electron-cra",
       "electronVersion": "6.0.12",
@@ -23,10 +23,12 @@
       "electron-is-dev": "^1.1.0",
       "i": "^0.3.6",
       "is-electron": "^2.2.0",
+      "knex": "^0.19.5",
       "react": "^16.10.2",
       "react-dom": "^16.10.2",
       "react-router-dom": "^5.1.2",
       "react-scripts": "3.2.0",
+      "sqlite3": "^4.1.0",
       "styled-components": "^4.4.0",
       "wait-on": "^3.3.0"
    },
@@ -40,7 +42,8 @@
       "clean": "rmdir build /S /Q & rmdir dist/S /Q",
       "build-electron-mac": "mkdir build/src && cp -r src/shared/. build/src/shared",
       "build-electron-win": "mkdir build/src & robocopy src/shared build/src/shared",
-      "build": "npm run react-build && electron-builder build --win -c.extraMetadata.main=build/electron.js --publish never"
+      "build": "npm run react-build && electron-builder build --win -c.extraMetadata.main=build/electron.js --publish never",
+      "postinstall": "install-app-deps"
    },
    "eslintConfig": {
       "extends": "react-app"
