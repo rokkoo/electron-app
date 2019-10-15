@@ -21,17 +21,6 @@ function createWindow() {
       }
    });
 
-   infoWindow = new BrowserWindow({
-      width: 600,
-      height: 600,
-      parent: mainWindow,
-      show: false,
-      webPreferences: {
-         nodeIntegration: false,
-         preload: __dirname + '/preload.js' // load requite electron in react
-      }
-   });
-
    const startUrl = isDev
       ? 'http://localhost:3000'
       : url.format({
@@ -42,18 +31,10 @@ function createWindow() {
 
    mainWindow.loadURL(startUrl);
 
-   infoWindow.loadURL(startUrl);
-
    // Open the DevTools.
    mainWindow.webContents.openDevTools();
-   infoWindow.webContents.openDevTools();
 
    mainWindow.on('closed', () => (mainWindow = null));
-
-   infoWindow.on('close', e => {
-      e.preventDefault();
-      infoWindow.hide();
-   });
 }
 
 app.on('ready', createWindow);
@@ -71,9 +52,6 @@ app.on('activate', () => {
 });
 
 ipcMain.on('info', (even, args) => {
-   console.log(process.env.ELECTRON_START_URL, 'env');
-   console.log('On toggle-infor');
-   infoWindow.show();
-   infoWindow.webContents.send('info', args);
-   //infoWindow.isVisible() ? infoWindow.hide() : infoWindow.show();
+   console.log('On info');
+   mainWindow.webContents.send('loadData', args);
 });

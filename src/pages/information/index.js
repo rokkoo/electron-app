@@ -8,7 +8,7 @@ const ipcRenderer = window.ipcRenderer;
 const Information = () => {
    const [inf, setInfo] = useState('');
 
-   ipcRenderer.on(channels.APP_INFO, (event, args) => setInfo(args));
+   ipcRenderer.on(channels.LOAD_DATA, (event, args) => setInfo(args));
 
    return (
       <Wrapper>

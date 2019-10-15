@@ -1,13 +1,22 @@
 import React from 'react';
+
+import { useHistory } from 'react-router-dom';
+
+// Channels
 import { channels } from '../../shared/constants';
+
+// Styles
 import { Wrapper } from './styles';
 
+// Inter process renderer
 const { ipcRenderer } = window;
 
 const Home = () => {
+   const history = useHistory();
+
    const toogleInfo = () => {
-      console.log('s');
-      ipcRenderer.send(channels.APP_INFO, 'my custom state');
+      ipcRenderer.send(channels.APP_INFO, 'my custom args');
+      history.push('/info');
    };
 
    return (
