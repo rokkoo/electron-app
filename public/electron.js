@@ -19,8 +19,7 @@ async function createWindow() {
       height: 600,
       autoHideMenuBar: true, // hide menu
       webPreferences: {
-         nodeIntegration: false, // for security require was disbled
-         preload: __dirname + '/preload.js' // load requite electron in react
+         preload: path.join(__dirname, 'preload.js') // load requite electron in react
       }
    });
 

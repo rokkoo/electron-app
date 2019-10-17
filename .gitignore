@@ -4,7 +4,7 @@
 /dist
 
 # sqlite
-*.sqlite
+.sqlite*
 
 # dependencies
 /node_modules
