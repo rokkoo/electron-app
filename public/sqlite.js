@@ -17,7 +17,8 @@ exports.up = () => {
                table.increments('id');
                table.string('user_name');
             }) //
-            .then(() => console.info('Table users created'));
+            .then(() => console.info('Table users created'))
+            .catch(e => console.trace('Error creating schema users ', e));
       }
    });
 };

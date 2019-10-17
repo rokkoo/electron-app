@@ -56,6 +56,6 @@ app.on('activate', () => {
 
 ipcMain.on('info', async (even, args) => {
    console.log('On info');
-   const data = addUser('dryad');
-   mainWindow.webContents.send('loadData', args);
+   const data = addUser(args);
+   mainWindow.webContents.send('loadData', data);
 });

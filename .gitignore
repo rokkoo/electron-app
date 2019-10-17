@@ -3,6 +3,8 @@
 # electron production
 /dist
 
+# sqlite
+*.sqlite
 
 # dependencies
 /node_modules
