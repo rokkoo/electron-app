@@ -23,7 +23,7 @@
       "electron-is-dev": "^1.1.0",
       "i": "^0.3.6",
       "is-electron": "^2.2.0",
-      "knex": "^0.19.5",
+      "knex": "^2.4.0",
       "react": "^16.10.2",
       "react-dom": "^16.10.2",
       "react-router-dom": "^5.1.2",
